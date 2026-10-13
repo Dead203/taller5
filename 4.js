@@ -1,21 +1,26 @@
-const ganancias = (inversion1) =>{
-    return inversion1 * 0.02;
+// Un local de empanadas registra sus ventas diarias. El programa arranca con este array fijo:
+// let dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado",
+// "Domingo"];
+// Pedir la venta de cada día usando el nombre del día en el mensaje, guardarlas en otro array y
+// mostrar un reporte día por día con el total de la semana.
+
+let dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+let venta = 0;
+let ventas = [];
+
+for(let i=0; i<7; i++){
+    ventas.push(parseInt(prompt(`Ingrese el valor de las ganancias del dia ${dias[i]}`)));
+    venta += ventas[i];
 }
 
-const ganancias2 = (suma1) =>{
-    return suma1 + total;
+let j = 0;
+while(true){
+    if(j<7){
+        console.log(`Dia: ${dias[j]} | Ganancias: ${ventas[j]}`);
+        j++;
+    }else{
+        break;
+    }
 }
 
-let inversion = parseFloat(prompt("Ingrese el capital a invertir: "));
-let tiempo = parseInt(prompt("Ingrese el tiempo a invertir en meses: "));
-let ganancias1 = 0;
-let total = 0;
-
-for(let i=1; i<=tiempo; i++){
-    ganancias1=ganancias(inversion);
-    inversion = inversion + ganancias1;
-    total = ganancias2(ganancias1);
-    console.log(`Mes ${i}: $${inversion}`);
-}
-
-console.log(`Ganancias: $${total}`);
+console.log(`Total ventas: ${venta}`);

@@ -1,30 +1,11 @@
-let suma = 0;
-let peso = 0;
-let bascula = 0;
-let kilos = "";
-let promedio = 0;
-
-const suma1 = (num) => {
-    return suma += num;
+let mercado = [];
+const cantidadProductos = parseInt(prompt("Ingrese la cantidad de productos: "));
+for(let i=0; i<cantidadProductos; i++){
+    mercado.push(prompt(`Producto ${i+1}:`));
 }
+mercado.forEach((producto, i) => {
+    console.log(`${i+1}: ${producto}`)
+})
+// no se puede parar el forEach a mitad, ya que recorre siempre toda la lista sin parar
 
-const division = (num1) =>{
-    return num1/10;
-}
-
-for(let i=1; i<=5; i++){
-    peso = parseFloat(prompt("Ingrese el peso inicial: "));
-    suma = 0;
-    for(let j=1; j<=10; j++){
-        bascula = parseFloat(prompt(`Peso bascula ${j}: `));
-        suma1(bascula)
-    }
-    promedio = division(suma);
-    if(promedio<peso){
-        console.log(`Bajo: ${peso-promedio} kg el obrero ${i}`);
-    }else if(promedio>peso){
-        console.log(`Subio: ${promedio-peso} kg del obrero ${i}`);
-    }else if(promedio === peso){
-        console.log(`Se mantuvo en: ${peso} kg del obrero ${i}`);
-    }
-}
+console.log(`Total productos: ${mercado.length}`);

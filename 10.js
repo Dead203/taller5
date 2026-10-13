@@ -1,24 +1,27 @@
-let dolares = 0;
-let pesos = 0;
-let perAtendidas = 0;
-let total = 0;
+// Leer 8 números enteros. Construir dos arrays nuevos, uno con los pares y otro con los impares,
+// en el orden en que llegaron. Mostrar ambos con su cantidad. Si alguno queda vacío, mostrar
+// "(ninguno)".
 
-const conversion = (num) =>{
-    return num*3550
+let numerosPar = [];
+let numerosImpar = [];
+let numero = 0;
+
+for(let i=0; i<8; i++){
+    numero = parseInt(prompt(`Ingrese el numero ${i+1}`));
+    if((numero%2) === 0){
+        numerosPar.push(numero);
+    }else{
+        numerosImpar.push(numero);
+    }
 }
 
-
-while(true){
-    dolares = parseInt(prompt("Ingresa la cantidad de dolares"))
-    if(dolares != 0){
-        pesos = conversion(dolares)
-        perAtendidas++;
-        total = total + pesos;
-        console.log(`El valor de ${dolares} dolares en pesos es de: ${pesos}`);
-    }else{
-        console.log(`Personas totales atendidas: ${perAtendidas}`);
-        console.log(`La suma total de pesos es: ${total}`);
-        console.log(`Hasta luego`);
-        break;
-    }
+if(numerosPar.length === 0){
+    console.log(`Pares: (ninguno)`);
+    console.log(`Impares: ${numerosImpar}`);
+}else if(numerosImpar.length === 0){
+    console.log(`Pares: ${numerosPar}`);
+    console.log(`Impares: (ninguno)`);
+}else{
+    console.log(`Pares: ${numerosPar}`);
+    console.log(`Impares: ${numerosImpar}`);
 }

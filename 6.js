@@ -1,20 +1,33 @@
-const obreros = parseInt(prompt("Ingrese el numero de obreros para calcular su nómina: "));
+let invitados = ["ana", "carlos", "luisa", "pedro", "sofia"];
+let nombre = "";
+let ingresar = false;
+let entrar = 0;
+let noEntrar = 0;
 
-let horas;
-let pago;
-let total = 0;
-const nomina = (num) =>{
-    if(num<=40){
-        return num * 12000;
+const aceptados = (nombre, lista) => {
+    for(let j=0; j<lista.length; j++){
+        if(nombre == lista[j]){
+            return true; 
+        }
+    }
+    return false;
+}
+
+while(true){
+    nombre = prompt(`Ingrese el nombre del invitado`);
+    if(nombre != "fin" && nombre != "Fin" && nombre != "FIN"){
+        ingresar = aceptados(nombre.toLowerCase(), invitados);
+        if(ingresar == true){
+            console.log(`${nombre} puede ingresar`);
+            entrar += 1;
+        }else{
+            console.log(`${nombre} no puede ingresar`);
+            noEntrar += 1;
+        }
     }else{
-        return ((num - 40)*15000)+(40*12000);
+        break;
     }
 }
 
-for (let i=1; i<=obreros; i++){
-    horas = parseInt(prompt(`Ingrese el numero de horas trabajadas ${i}`));
-    pago = nomina(horas);
-    console.log(`El obrero ${i} tiene una nomina de: ${pago}`);
-    total = total + pago;
-}
-console.log(`La nomina total es de: ${total}`);
+console.log(`Ingresaron: ${entrar}`);
+console.log(`No pudieron ingresar: ${noEntrar}`);

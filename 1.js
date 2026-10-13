@@ -1,10 +1,10 @@
-const multiplicar = (multiplicador, multiplicando)=>{
-    return multiplicador * multiplicando;
+let mercado = [];
+const cantidadProductos = parseInt(prompt("Ingrese la cantidad de productos: "));
+for(let i=0; i<cantidadProductos; i++){
+    mercado.push(prompt(`Producto ${i+1}:`));
+}
+for(let j=0; j<mercado.length; j++){
+    console.log(`${j+1}: ${mercado[j]}`);
 }
 
-const num = parseInt(prompt("Ingrese el numero: "));
-
-for(let i = 1; i<=10; i++){
-    const rta = multiplicar(num, i)
-    console.log(`${num} * ${i} = ${rta}`);
-}
+console.log(`Total productos: ${mercado.length}`);

@@ -1,20 +1,63 @@
-const contarDivisores = numero => {
-    let divisores = 0;
-    for(let i = 1; i <= numero; i++){
-        if(numero % i == 0) divisores++;
-    }
-    return divisores;
+// Leer las distancias en kilómetros de N pedidos del día. El envío es gratis hasta 3 km y la
+// cobertura máxima es de 10 km. Con filter, obtener los pedidos con envío gratis. Con find, el
+// primer pedido fuera de cobertura. Mostrar también cuántos pedidos pagan envío (más de 3 km
+// y hasta 10 km). Si ningún pedido está fuera de cobertura, mostrar "Todos los pedidos están en
+// cobertura".
+
+function obtenerEnvioGratis(distancias) {
+    return distancias.filter(function(distancia) {
+        return distancia <= 3;
+    });
 }
 
-const esPrimo = numero => contarDivisores(numero) == 2;
-
-let n = Number(prompt("Límite:"));
-let cantidad = 0;
-
-for(let i = 2; i <= n; i++){
-    if(esPrimo(i)){
-        console.log(i);
-        cantidad++;
+function contarConEnvio(distancias) {
+    let cantidad = 0;
+    for (let i = 0; i < distancias.length; i++) {
+        if (distancias[i] > 3 && distancias[i] <= 10) {
+            cantidad = cantidad + 1;
+        }
     }
+    return cantidad;
 }
-console.log("Cantidad de primos: " + cantidad);
+
+function buscarPrimeroFuera(distancias) {
+    return distancias.find(function(distancia) {
+        return distancia > 10;
+    });
+}
+
+function unirConComas(lista) {
+    let texto = "";
+    for (let i = 0; i < lista.length; i++) {
+        texto = texto + lista[i];
+        if (i < lista.length - 1) {
+            texto = texto + ", ";
+        }
+    }
+    return texto;
+}
+
+let cantidad = Number(prompt("¿Cuántos pedidos?"));
+let distancias = [];
+
+for (let i = 0; i < cantidad; i++) {
+    distancias.push(Number(prompt("Distancia del pedido " + (i + 1) + " (km):")));
+}
+
+let enviosGratis = obtenerEnvioGratis(distancias);
+let cantidadPagados = contarConEnvio(distancias);
+let primeroFuera = buscarPrimeroFuera(distancias);
+
+console.log("Envíos gratis: " + unirConComas(enviosGratis));
+console.log("Pedidos con envío pagado: " + cantidadPagados);
+
+if (primeroFuera === undefined) {
+    console.log("Todos los pedidos están en cobertura");
+
+} else {
+    console.log(
+        "Primer pedido fuera de cobertura: " +
+        primeroFuera +
+        " km"
+    );
+}

@@ -1,33 +1,32 @@
-let random = 0;
-let num = 0;
-let intento = 1;
-let rta = "";
-const numero = (num) => {
-    return num = Math.floor(Math.random() * 100) + 1;
-}
+// Leer 10 números. Construir un array nuevo sin repetidos que conserve el orden en que
+// apareció cada número por primera vez. Mostrar cuántos repetidos se eliminaron.
 
-const igual = (respuesta) =>{
-    if(respuesta == random){
-        return console.log(`Ganaste | intentos : ${intento}`);
-    }
-}
+let numeros = [];
+let sinRepetidos  = [];
+let numero = 0;
+let eliminados = 0;
+let existeLista = false;
 
-random = numero(random)
-
-while(true){
-    if(intento<=7){
-        num = parseInt(prompt(`Intento numero ${intento}`));
-        if(num<random){
-            console.log(`El numero es mayor`);
-        }else if(num>random){
-            console.log(`El numero es menor`);
-        }else{
-            rta = igual(num)
-            break;
+const aceptados = (numero, lista) => {
+    for(let j=0; j<lista.length; j++){
+        if(numero == lista[j]){
+            return true; 
         }
-        intento++;
-    }else{
-        console.log(`Se te acabaron los intentos`);
-        break;
+    }
+    return false;
+}
+
+for(let i=0; i<10; i++){
+    numero = parseInt(prompt(`Ingrese el numero ${i+1}: `));
+    numeros.push(numero);
+    existeLista = aceptados(numero, sinRepetidos)
+    if(existeLista === false){
+        sinRepetidos.push(numero);
     }
 }
+
+eliminados = numeros.length - sinRepetidos.length;
+
+console.log(`Lista original ${numeros}`);
+console.log(`Sin repetidos: ${sinRepetidos}`);
+console.log(`Eliminados: ${eliminados}`);

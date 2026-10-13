@@ -1,27 +1,43 @@
-const cliente = () => {
-    let total = 0, precio = Number(prompt("Precio:"));
-    while(precio != 0){
-    total += precio;
-    precio = Number(prompt("Precio:"));
+// Leer los precios de N productos sin IVA. Generar con map un array nuevo con el precio más
+// IVA del 19%, redondeado a pesos con Math.round. Mostrar ambos arrays y el total con IVA.
+// Escribe también la versión con for en otra función y comprueba que las dos den el mismo
+// resultado.
+
+const calcularConIva = precio => {
+    return Math.round(precio * 1.19);
+}
+
+const aplicarIvaConMap = precios => {
+    return precios.map(precio => calcularConIva(precio));
+}
+
+const aplicarIvaConFor = precios => {
+    let nuevosPrecios = [];
+
+    for(let i = 0; i < precios.length; i++){
+        nuevosPrecios.push(calcularConIva(precios[i]));
+    }
+
+    return nuevosPrecios;
+}
+
+const calcularTotal = precios => {
+    let total = 0;
+    for(let i = 0; i < precios.length; i++){
+        total += precios[i];
     }
     return total;
 }
-const otro = () => prompt("¿Otro cliente? S/N") == "S";
-let n = 0;
-let dia = 0;
-let mayor = 0;
-let num = 0;
-let seguir = true;
-while(seguir){
-    n++;
-    let total = cliente();
-    dia += total;
-    while(total > mayor){
-    mayor = total;
-    num = n;
-    }
-    seguir = otro();
+
+let precios = [];
+let cantidad = Number(prompt("¿Cuántos precios?"));
+for(let i = 0; i < cantidad; i++){
+    precios.push(Number(prompt("Precio " + (i + 1) + ":")));
 }
-console.log("Clientes: " + n);
-console.log("Total: " + dia);
-console.log("Mayor compra: cliente " + num + " con " + mayor);
+
+let preciosMap = aplicarIvaConMap(precios);
+let preciosFor = aplicarIvaConFor(precios);
+console.log("Precios sin IVA: " + precios);
+console.log("Con IVA usando map: " + preciosMap);
+console.log("Total con IVA: $" + calcularTotal(preciosMap));
+console.log("Con IVA usando for: " + preciosFor);
